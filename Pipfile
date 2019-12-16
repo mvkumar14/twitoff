@@ -17,6 +17,7 @@ gunicorn = "*"
 scikit-learn = "*"
 python-dotenv = "*"
 python-decouple = "*"
+tracery = "*"
 
 [requires]
 python_version = "3.7"
