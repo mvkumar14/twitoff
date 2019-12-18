@@ -1,4 +1,4 @@
-from .models import *
+from models import *
 import tracery
 from tracery.modifiers import base_english
 
@@ -8,7 +8,5 @@ from tracery.modifiers import base_english
 # Random Users
 
 
-my_adds.append()
-
-for i in my_adds:
-    DB.session.add(i)
+test_1 = User(name='John',id=4)
+DB.session.add(test_1)

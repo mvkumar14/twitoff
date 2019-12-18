@@ -1,24 +1,35 @@
 """Code for our app"""
 
 
-
-from flask import Flask
-from .models import DB
+from decouple import config
+from flask import Flask, render_template, request
+from .models import DB, User
 
 # We are creating an app factory
 def create_app():
     app = Flask(__name__)
 
-    # add config for database
+    # Add config for database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+    # To get rid of the depreciation warning
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # have the database know about the app
+    # Have the database know about the app
     DB.init_app(app)
 
-
+    # Create new route
     @app.route('/')
+
     def root():
-        return "Welcome to twitoff"
+        users = User.query.all()
+        return render_template('base.html', title='Home', users=users)
+
+    @app.route('/reset')
+    def reset():
+        DB.drop_all()
+        DB.create_all()
+        return render_template('base.html', title='Reset', users=[])
+
     return app
 # You can edit the above to be able to create new routes with
 # functionality that you choose to the functions in this file.
