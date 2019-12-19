@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/echo" method="post">
+  <input type = "text" name ="echo_box" placeholder="Type something to send to server">
+  <input type="submit" value="Update?">
+</form>
+{% endblock %}

@@ -4,15 +4,37 @@
   <head>
     <meta charset="utf-8">
       <title> Twitoff! - {{ title }} </title>
+      <!-- add a stylesheet -->
+      <link rel="stylesheet" href="https://unpkg.com/picnic">
     </head>
     <body>
-      <h1> Twitoff is so cool </h1>
-      <p> Content goes here ... </p>
+      <h1> Twitoff is cool! </h2>
+    {% block content %}
+    <!--form to show user information-->
+    <form action="/user" method="post">
+      <input type="text" name="user_name" placeholder="User to add">
+      <input type="submit" value="Add User">
+    </form>
 
-      <ul>
+    <!--form to compare users-->
+    <form action="/compare" method="post">
+      <!--user 1 dropdown-->
+      <select name='user1'>
         {% for user in users %}
-        <li> {{ user.name }} </li>
+        <option value="{{ user.name }}"> {{ user.name }} </option>
         {% endfor %}
-      </ul>
+      </select>
+
+      <!--user 2 dropdown-->
+      <select name='user2'>
+        {% for user in users %}
+        <option value="{{ user.name }}"> {{ user.name }} </option>
+        {% endfor %}
+      </select>
+
+      <input type = "text" name ="tweet_text" placeholder="Tweet text to predict">
+      <input type = "submit" name = "Compare Users">
+    </form>
+    {% endblock %}
     </body>
 </html>

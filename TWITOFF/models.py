@@ -25,6 +25,15 @@ class Tweet(DB.Model):
     id = DB.Column(DB.BigInteger,primary_key=True)
     text = DB.Column(DB.Unicode(300))
     user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'), nullable=False)
+    # The relationship between user and tweets is one to many, which is why the backlink
+    # is "tweets" instead of "tweet". If you wanted to properly convey a
+    # many to many relationship you might want to do a backfill from both ends
+    # referencing the other end in the plural form.
     user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
+
+    # Now this means that whenever new tweets are generated are added to the database
+    # you have to add the embedding too! (The processing time can be upfront, and then)
+    # comparisons can be made quickly.
+    embedding = DB.Column(DB.PickleType,nullable=False)
     def __repr__(self):
         return '<Tweet {}>'.format(self.text)
