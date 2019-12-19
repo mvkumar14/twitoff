@@ -18,6 +18,7 @@ scikit-learn = "*"
 python-dotenv = "*"
 python-decouple = "*"
 tracery = "*"
+heroku = "*"
 
 [requires]
 python_version = "3.7"
